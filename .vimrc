@@ -244,7 +244,7 @@ let g:ycm_seed_identifiers_with_syntax = 0
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 
-let g:languagetool_jar = '/usr/local/Cellar/languagetool/3.8/libexec/languagetool-commandline.jar'
+let g:languagetool_jar = '/usr/local/Cellar/languagetool/3.9/libexec/languagetool-commandline.jar'
 
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#444444 ctermbg=238

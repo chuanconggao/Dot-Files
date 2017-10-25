@@ -1,0 +1,6 @@
+linters:
+    Indentation:
+        enabled: false
+
+    ImportantRule:
+        enabled: false

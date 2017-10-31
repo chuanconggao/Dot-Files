@@ -24,7 +24,6 @@ if isGit():
 
     branch = git("symbolic-ref", "--short", "-q", "HEAD").rstrip('\r\n')
     remoteBranch = git("branch", "-r", "--list", f"origin/{branch}").rstrip('\r\n')
-
     if branch != "master":
         if branch:
             gitPrompt += '@' + color(branch, fg=(
@@ -33,31 +32,35 @@ if isGit():
         else:
             gitPrompt += color('@', fg="red")
 
-
-    flags = []
+    flags = ""
 
     allStatus = git("status", "-s").rstrip('\r\n')
     diffStatus = git("status", "-s", "-uno").rstrip('\r\n')
     if diffStatus:
-        flags.append(color('+', fg="red"))
-    if allStatus != diffStatus:
-        flags.append(color('?', fg="cyan"))
-
-    if branch and remoteBranch:
-        if int(git("rev-list", "--count", f"origin/{branch}..").rstrip('\r\n')) > 0:
-            flags.append(color('^', fg="green"))
-        if int(git("rev-list", "--count", f"HEAD..origin/{branch}").rstrip('\r\n')) > 0:
-            flags.append(color('!', fg="magenta"))
+        flags += color('+', fg="red", style="bold")
+    if len(allStatus) > len(diffStatus):
+        flags += color('?', fg="cyan", style="bold")
 
     if len(flags) > 0:
-        gitPrompt += ':' + color(''.join(flags), style="bold")
+        gitPrompt += ':' + flags
+
+    if remoteBranch:
+        flags = ""
+
+        if int(git("rev-list", "--count", f"origin/{branch}..").rstrip('\r\n')) > 0:
+            flags += color('^', fg="green", style="bold")
+        if int(git("rev-list", "--count", f"HEAD..origin/{branch}").rstrip('\r\n')) > 0:
+            flags += color('!', fg="cyan", style="bold")
+
+        if len(flags) > 0:
+            gitPrompt += '/' + flags
 else:
     gitPrompt = ""
 
 conditions = [
     ("direnv", lambda: isFile(".envrc"), None),
     ("make", lambda: isFile("makefile"), None),
-    ("pipenv", lambda: isFile("Pipfile") or isFile("Pipfile.lock"), None),
+    ("pipenv", lambda: isFile("Pipfile"), None),
     (None, lambda: isDir("node_modules") or isFile("package.json"), [
         ("yarn", lambda: isFile("yarn.lock")),
         ("npm", lambda: True),

@@ -25,7 +25,7 @@ function myprecmd() {
     local attrPrompt=$' ('
 
     if [[ $OSTYPE == "darwin"* ]]; then
-        local tags=$(mdls -name kMDItemUserTags -raw . | sed -e '1d' -e '$d' -e 's/^\s\+\|,/'$'\e[47;30m''/' -e 's/,/'$'\e[0m''/' | paste -d '+' -s)
+        local tags=$(mdls -name kMDItemUserTags -raw . | sed -e '1d; $d; s/^\s\+\|,/'$'\e[47;30m''/; s/,/'$'\e[0m''/' | paste -d '+' -s)
         if [[ $tags != "" ]]; then
             attrPrompt+=$tags$'\e[0m, '
         fi
@@ -45,100 +45,13 @@ function myprecmd() {
 
     attrPrompt+=$')'
 
-    local dirPrompt=""
-
-    local dirType=""
-    local dirFlag=""
-
-    if [ -d .git ] || git rev-parse --git-dir > /dev/null 2> /dev/null; then
-        dirType="git"
-        dirFlag=""
-
-        local branch=$(git symbolic-ref --short -q HEAD)
-        if [[ $branch != "master" ]]; then
-            if [[ $branch == "" ]]; then
-                dirType+=$'%{\e[31m%}@'
-            else
-                dirType+=$'%{\e[0m%}@'
-                if [[ $(git branch -r --list origin/$branch) != "" ]]; then
-                    dirType+=$'%{\e[32m%}'
-                else
-                    dirType+=$'%{\e[31m%}'
-                fi
-                dirType+=$branch
-            fi
-        fi
-
-        if [[ $(diff <(git status -s) <(git status -s -uno)) != "" ]]; then
-            dirFlag+=$'%{\e[36m%}?'
-        fi
-        if [[ $(git status -s -uno) != "" ]]; then
-            dirFlag+=$'%{\e[31m%}+'
-        fi
-        if [[ $branch != "" && $(git branch -r --list origin/$branch) != "" ]]; then
-            if [[ $(git log origin/$branch..) != "" ]]; then
-                dirFlag+=$'%{\e[32m%}^'
-            fi
-            if [[ $(git log HEAD..origin/$branch) != "" ]]; then
-                dirFlag+=$'%{\e[36m%}!'
-            fi
-        fi
-        if [[ ! -z $dirFlag ]]; then
-            dirFlag=$'%{\e[0m%}:%{\e[1m%}'$dirFlag
-        fi
-
-        if [[ ! -z $dirPrompt ]]; then
-            dirPrompt+=" | "
-        fi
-        dirPrompt+=$'%{\e[33m%}'$dirType$dirFlag$'%{\e[0m%}'
-    fi
-
-    if [ -d bower_components ]; then
-        dirType="bower"
-
-        if [[ ! -z $dirPrompt ]]; then
-            dirPrompt+=" | "
-        fi
-        dirPrompt+=$'%{\e[33m%}'$dirType$'%{\e[0m%}'
-    fi
-
-    if [ -d node_modules ] || [ -f package.json ]; then
-        if [ -f yarn.lock ]; then
-            dirType="yarn"
-        else
-            dirType="npm"
-        fi
-
-        if [[ ! -z $dirPrompt ]]; then
-            dirPrompt+=" | "
-        fi
-        dirPrompt+=$'%{\e[33m%}'$dirType$'%{\e[0m%}'
-    fi
-
-    if [[ -f makefile ]]; then
-        dirType="make"
-
-        if [[ ! -z $dirPrompt ]]; then
-            dirPrompt+=" | "
-        fi
-        dirPrompt+=$'%{\e[33m%}'$dirType$'%{\e[0m%}'
-    fi
-
-    if [ -f ".envrc" ]; then
-        dirType="direnv"
-
-        if [[ ! -z $dirPrompt ]]; then
-            dirPrompt+=" | "
-        fi
-        dirPrompt+=$'%{\e[33m%}'$dirType$'%{\e[0m%}'
-    fi
-
-    if [[ ! -z $dirPrompt ]]; then
-        dirPrompt=$' {'$dirPrompt$'}%{\e[0m%}'
+    local dirPrompt=$(~/.zsh/rc/dir.py)
+    if [[ $dirPrompt != "" ]]; then
+        dirPrompt=$' {'$dirPrompt$'}'
     fi
 
     local venvPrompt=""
-    if [[ ! -z $VIRTUAL_ENV ]]; then
+    if [[ $VIRTUAL_ENV != "" ]]; then
         venvPrompt=$' <'$'%{\e[31m%}'$(basename $VIRTUAL_ENV)$'%{\e[0m%}>'
     fi
 

@@ -1,26 +1,40 @@
 #!/usr/bin/env python3
 
-import sys
+import os
 
-def shorten(d, flag):
-    if len(d) <= 4:
-        flag = False
+def prepare(d, shorten=True):
+    shorten = shorten and len(d) > 4
 
-    x = d[:3] if flag else d
-    return "{}{}".format(
-        "'{}'".format(x) if ' ' in x else x,
-        '*' if flag else ''
+    x = d[:3] if shorten else d
+    return (
+        ("'{}'".format(x) if ' ' in x else x) +
+        ('*' if shorten else '')
     )
 
-for s in sys.stdin:
-    x = s.rstrip('\r\n').rsplit('/', 1)
+def colorPath(p):
+    return f"\x1b[1;34m{p}\x1b[0m"
 
-    if len(x) == 1:
-        print(shorten(x[0], False))
-    else:
-        print('{}/{}'.format(
-            '/'.join(
-                shorten(d, True) for d in x[0].split('/')
-            ),
-            shorten(x[1], False)
-        ))
+def colorDir(p):
+    return f"\x1b[1;94m{p}\x1b[0m"
+
+home = os.environ["HOME"]
+cwd = os.getcwd()
+if (cwd + '/').startswith(home + '/'):
+    cwd = '~' + cwd[len(home):]
+
+splits = cwd.rsplit('/', 1)
+if len(splits) == 1:
+    current_path, current_dir = "", splits[0]
+else:
+    current_path, current_dir = splits[0] + '/', splits[1]
+
+print(
+    colorPath(
+        '/'.join(
+            prepare(d) for d in current_path.split('/')
+        ),
+    ) + colorDir(
+        prepare(current_dir, shorten=False)
+    ),
+    end=""
+)

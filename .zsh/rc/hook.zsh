@@ -16,11 +16,7 @@ function myprecmd() {
 
     local userPrompt=$'%(!.%{\e[31m%}.%{\e[32m%})%n%{\e[0m%}@%{\e[35m%}%m%{\e[0m%}'
 
-    local shorten_pwd=$(perl -p -e "s|^$HOME|~|" <<< $PWD | ~/.zsh/rc/pwd.py)
-    local current_path=$(perl -p -e "s|[^/]+\$||" <<< $shorten_pwd)
-    local current_dir=$(perl -p -e "s|^.*?([^/]+)\$|\$1|" <<< $shorten_pwd)
-
-    local pwdPrompt=$' %{\e[1;34m%}'$current_path$'%{\e[1;94m%}'$current_dir$'%{\e[0m%}'
+    local pwdPrompt=" "$(~/.zsh/rc/pwd.py)
 
     local attrPrompt=$' ('
 

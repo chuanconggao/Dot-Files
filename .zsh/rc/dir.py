@@ -3,7 +3,7 @@
 from pathlib import Path
 
 from colors import color
-from sh import git
+from git import parseGitStatus
 
 def isFile(f):
     p = Path(f)
@@ -14,33 +14,31 @@ def isDir(d):
     return p.exists() and p.is_dir()
 
 def getGitPrompt():
-    def isGit():
-        try:
-            return isDir(".git") or git("rev-parse", "--git-dir")
-        except:
-            return False
-
-    if not isGit():
+    status = parseGitStatus()
+    if status is None:
         return ""
+
+    (branch, hasRemote, ahead, behind, modified, untracked) = status
 
     gitPrompt = color("git", fg="yellow")
 
-    branch = git("symbolic-ref", "--short", "-q", "HEAD").rstrip('\r\n')
-    remoteBranch = git("branch", "-r", "--list", f"origin/{branch}").rstrip('\r\n')
-    if branch != "master":
-        if branch:
-            gitPrompt += '@' + color(branch, fg=(
-                "green" if remoteBranch else "cyan"
-            ))
-        else:
-            gitPrompt += color('@', fg="red")
+    if branch is None:
+        gitPrompt += color('@', fg="red")
+    else:
+        if branch == "master":
+            branch = ""
 
-    if remoteBranch:
+        if branch != "" or not hasRemote:
+            gitPrompt += '@' + color(branch, fg=(
+                "green" if hasRemote else "cyan"
+            ))
+
+    if hasRemote:
         flags = ""
 
-        if int(git("rev-list", "--count", f"origin/{branch}..").rstrip('\r\n')) > 0:
+        if ahead > 0:
             flags += color('^', fg="green", style="bold")
-        if int(git("rev-list", "--count", f"HEAD..origin/{branch}").rstrip('\r\n')) > 0:
+        if behind > 0:
             flags += color('!', fg="cyan", style="bold")
 
         if len(flags) > 0:
@@ -48,11 +46,9 @@ def getGitPrompt():
 
     flags = ""
 
-    allStatus = git("status", "-s").rstrip('\r\n')
-    diffStatus = git("status", "-s", "-uno").rstrip('\r\n')
-    if diffStatus:
+    if modified:
         flags += color('+', fg="red", style="bold")
-    if len(allStatus) > len(diffStatus):
+    if untracked:
         flags += color('?', fg="cyan", style="bold")
 
     if len(flags) > 0:

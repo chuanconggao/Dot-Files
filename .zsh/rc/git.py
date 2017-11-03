@@ -1,6 +1,10 @@
 #! /usr/local/bin/python3
 
+import re
+
 from sh import git
+
+reSubUntracked = re.compile(r'^S..U$')
 
 def parseGitStatus():
     try:
@@ -26,7 +30,12 @@ def parseGitStatus():
         elif line[0] == '?':
             untracked = True
         elif line[0] != '!':
-            modified = True
+            s, c, m, u = line.split(' ')[2]
+            if s == 'N':
+                modified = True
+            elif s == 'S':
+                modified = modified or c == 'C' or m == 'M'
+                untracked = untracked or u == 'U'
 
     return (branch, hasRemote, ahead, behind, modified, untracked)
 

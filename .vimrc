@@ -224,11 +224,10 @@ let g:tagbar_sort = 0
 let g:tagbar_usearrows = 1
 let g:tagbar_iconchars = ['▸', '▾']
 
-let g:syntastic_cpp_compiler_options = '-std=c++11'
-let g:syntastic_enable_r_lintr_checker = 1
-let g:syntastic_r_checkers = ['lintr']
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
-let g:rootmarkers = ['makefile', 'build.xml', '.svn', '.git', '.hg', '.cvs']
+let g:rootmarkers = ['.git', 'makefile', 'build.xml']
 
 let g:showmarks_marks = "abcdefghijklmnopqrstuvwxyz"
 

@@ -1,7 +1,7 @@
 function myprecmd() {
     local exitCode=$?
     if [[ $exitCode -ne 0 && $timer ]]; then
-        print "\e[1;90m<<<\e[0m ""\e[4;91mExit Code\e[0m: $exitCode"
+        print "\e[1;90m<<<\e[0m \e[4;91mExit Code\e[0m: $exitCode"
     fi
 
     print -Pn "\e]2; %~ \a"
@@ -9,7 +9,7 @@ function myprecmd() {
     if [ $timer ]; then
         local timer_show=$(($SECONDS - $timer))
         if [ ${timer_show} -gt 10 ]; then
-            print "\e[1;90m<<<\e[0m ""\e[4;90mRunning Time\e[0m: ${timer_show}s"
+            print "\e[1;90m<<<\e[0m \e[4;90mRunning Time\e[0m: ${timer_show}s"
         fi
         unset timer
     fi
@@ -18,7 +18,7 @@ function myprecmd() {
 
     local pwdPrompt=" "$(~/.zsh/rc/pwd.py)
 
-    local attrPrompt=$' ('
+    local attrPrompt=" ("
 
     if [[ $OSTYPE == "darwin"* ]]; then
         local tags=$(mdls -name kMDItemUserTags -raw . | sed -e '1d; $d; s/^\s\+/'$'\e[47;30m''/; s/,/'$'\e[0m''/' | paste -d '+' -s)
@@ -27,23 +27,24 @@ function myprecmd() {
         fi
     fi
 
-    local itemNum=$(ls | wc -l)
-    local hiddenItemFlag=""
-    if [[ $(ls -A | wc -l) -gt $itemNum ]]; then
-        hiddenItemFlag=$'%{\e[1;36m%}*%{\e[0m%}'
+    local items=(*(N))
+    local hiddenItems=(.*(N))
+    local itemNum=${#items}
+    if [[ ${#hiddenItems} -gt 0 ]]; then
+        itemNum+=$'%{\e[1;36m%}*%{\e[0m%}'
     fi
-    attrPrompt+=$itemNum$hiddenItemFlag$' \e[90mitems\e[0m'
+    attrPrompt+=$itemNum$' \e[90mitems\e[0m'
 
     local readmeFile=$(print {readme,readme.*}(.N))
     if [[ $readmeFile != "" ]]; then
         attrPrompt+=": "$readmeFile
     fi
 
-    attrPrompt+=$')'
+    attrPrompt+=")"
 
     local dirPrompt=$(~/.zsh/rc/dir.py)
     if [[ $dirPrompt != "" ]]; then
-        dirPrompt=$' {'$dirPrompt$'}'
+        dirPrompt=" {"$dirPrompt"}"
     fi
 
     local venvPrompt=""

@@ -1,15 +1,13 @@
 #! /usr/local/bin/python3
 
-import re
-
-from sh import git
-
-reSubUntracked = re.compile(r'^S..U$')
+import subprocess
 
 def parseGitStatus():
-    try:
-        status = git("status", "-s", "-b", "--porcelain=2", '-z').rstrip('\0').split('\0')
-    except:
+    output = subprocess.Popen(
+        ["git", "status", "-s", "-b", "--porcelain=2", "-z"],
+        stdout=subprocess.PIPE, stderr=subprocess.DEVNULL
+    ).communicate()[0].decode("utf-8")
+    if output == "":
         return None
 
     branch = None
@@ -17,7 +15,7 @@ def parseGitStatus():
     ahead, behind = 0, 0
     modified, untracked = False, False
 
-    for line in status:
+    for line in output.rstrip('\0').split('\0'):
         if line[0] == '#':
             if line.startswith("# branch.head "):
                 branchName = line.rsplit(' ', 1)[1]

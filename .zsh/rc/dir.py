@@ -5,13 +5,15 @@ from pathlib import Path
 from colors import color
 from git import parseGitStatus
 
-def isFile(f):
-    p = Path(f)
-    return p.exists() and p.is_file()
+def isFile(*files):
+    for f in files:
+        p = Path(f)
+        return p.exists() and p.is_file()
 
-def isDir(d):
-    p = Path(d)
-    return p.exists() and p.is_dir()
+def isDir(*dirs):
+    for d in dirs:
+        p = Path(d)
+        return p.exists() and p.is_dir()
 
 def getGitPrompt():
     status = parseGitStatus()
@@ -58,22 +60,24 @@ def getGitPrompt():
 
 def getDirPrompt():
     conditions = [
-        ("direnv", lambda: isFile(".envrc"), None),
-        ("make", lambda: isFile("makefile"), None),
-        ("pip", lambda: isFile("requirements.txt"), None),
-        ("pipenv", lambda: isFile("Pipfile"), None),
-        (None, lambda: isDir("node_modules") or isFile("package.json"), [
+        ("direnv", isFile(".envrc"), None),
+        ("make", isFile("makefile"), None),
+        (None, isFile("requirements.txt", "Pipfile"), [
+            ("pipenv", lambda: isFile("Pipfile")),
+            ("pip", lambda: isFile("requirements.txt")),
+        ]),
+        (None, isDir("node_modules") or isFile("package.json"), [
             ("yarn", lambda: isFile("yarn.lock")),
             ("npm", lambda: True),
         ]),
-        ("bower", lambda: isDir("bower_components"), None),
+        ("bower", isDir("bower_components"), None),
     ]
 
     return " | ".join(
         color(tag if tag else next(
             subtag for subtag, subcond in sub if subcond()
         ), fg="yellow")
-        for tag, cond, sub in conditions if cond()
+        for tag, cond, sub in conditions if cond
     )
 
 print(" | ".join(

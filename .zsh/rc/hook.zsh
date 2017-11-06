@@ -1,18 +1,24 @@
 function myprecmd() {
     local exitCode=$?
+    local exitStatus=""
     if [[ $exitCode -ne 0 && $timer ]]; then
-        print "\e[1;90m<<<\e[0m \e[4;91mExit Code\e[0m: $exitCode"
+        exitStatus+=$'\e[4;91mExit Code\e[0m: '$exitCode"; "
     fi
 
-    print -Pn "\e]2; %~ \a"
-
+    local timeStatus=""
     if [ $timer ]; then
         local timer_show=$(($SECONDS - $timer))
         if [ ${timer_show} -gt 10 ]; then
-            print "\e[1;90m<<<\e[0m \e[4;90mRunning Time\e[0m: ${timer_show}s"
+            timeStatus+=$'\e[4;90mRunning Time\e[0m: '${timer_show}"s; "
         fi
         unset timer
     fi
+
+    if [[ $exitStatus != "" || $timeStatus != "" ]]; then
+        print "\e[1;90m<<<\e[0m "$exitStatus$timeStatus
+    fi
+
+    print -Pn "\e]2; %~ \a"
 
     local userPrompt=$'%(!.%{\e[31m%}.%{\e[32m%})%n%{\e[0m%}@%{\e[35m%}%m%{\e[0m%}'
 

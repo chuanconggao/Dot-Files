@@ -27,9 +27,9 @@ function myprecmd() {
     local attrPrompt=" ("
 
     if [[ $OSTYPE == "darwin"* ]]; then
-        local tags=$(mdls -name kMDItemUserTags -raw . | sed -e '1d; $d; s/^\s\+/'$'\e[47;30m''/; s/,/'$'\e[0m''/' | paste -d '+' -s)
+        local tags=$(tag -N . | sed -e 's/,/|/g')
         if [[ $tags != "" ]]; then
-            attrPrompt+=$tags$'\e[0m, '
+            attrPrompt+=$'\e[47;30m'$tags$'\e[0m, '
         fi
     fi
 

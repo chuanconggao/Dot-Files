@@ -1,5 +1,6 @@
 #! /usr/local/bin/python3
 
+import os
 from pathlib import Path
 
 from colors import color
@@ -60,11 +61,11 @@ def getGitPrompt():
 
 def getDirPrompt():
     conditions = [
-        ("direnv", isFile(".envrc"), None),
+        ("direnv", os.environ.get("DIRENV_DIR"), None),
         ("make", isFile("makefile"), None),
         (None, isFile("requirements.txt", "Pipfile"), [
-            ("pipenv", lambda: isFile("Pipfile")),
-            ("pip", lambda: isFile("requirements.txt")),
+            ("pipenv", lambda: isFile("Pipfile.lock")),
+            ("pip", lambda: True),
         ]),
         (None, isDir("node_modules") or isFile("package.json"), [
             ("yarn", lambda: isFile("yarn.lock")),

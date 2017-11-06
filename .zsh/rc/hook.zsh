@@ -27,7 +27,7 @@ function myprecmd() {
     local attrPrompt=" ("
 
     if [[ $OSTYPE == "darwin"* ]]; then
-        local tags=$(tag -N . | sed -e 's/,/|/g')
+        local tags=$(tag -N . | tr ',' '|')
         if [[ $tags != "" ]]; then
             attrPrompt+=$'\e[47;30m'$tags$'\e[0m, '
         fi
@@ -40,11 +40,6 @@ function myprecmd() {
         itemNum+=$'%{\e[1;36m%}*%{\e[0m%}'
     fi
     attrPrompt+=$itemNum$' \e[90mitems\e[0m'
-
-    local readmeFile=$(print {readme,readme.*}(.N))
-    if [[ $readmeFile != "" ]]; then
-        attrPrompt+=": "$readmeFile
-    fi
 
     attrPrompt+=")"
 

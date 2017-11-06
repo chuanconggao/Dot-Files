@@ -83,24 +83,24 @@ fi
 
 eval "$(npm completion)"
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
+eval "$(direnv hook zsh)"
+. ~/.zsh/rc/hook.zsh
+
+. ~/.zsh/plugins/bd/bd.zsh
+
 if [[ $OSTYPE == "darwin"* ]]; then
-    . /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     . /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     . /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+    . /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [[ $OSTYPE == "linux"* ]]; then
-    . ~/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     . ~/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     . ~/.linuxbrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+    . ~/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
-
-eval "$(direnv hook zsh)"
-. ~/.zsh/rc/hook.zsh
-
-. ~/.zsh/plugins/bd/bd.zsh

@@ -6,21 +6,26 @@ fi
 function myprecmd() {
     local exitCode=$?
 
-    local exitStatus=""
-
-    if [[ $exitCode -ne 0 ]]; then
-        exitStatus+=$'\e[4;91mExit Code\e[0m: '$exitCode"; "
+    local updatePrompt=""
+    if [[ $ENDTIME && $(stat . -c %Z) -ge $ENDTIME ]]; then
+        updatePrompt+=$' \e[90m•\e[0m'
     fi
 
     ENDTIME=$(date +%s)
 
+    local exitStatus=""
     if [[ $STARTTIME ]]; then
+        if [[ $exitCode -ne 0 ]]; then
+            exitStatus+=$'\e[4;91mExit Code\e[0m: '$exitCode"; "
+        fi
+
         local duration=$(($ENDTIME - $STARTTIME))
         if [ ${duration} -gt 10 ]; then
             exitStatus+=$'\e[4;90mRunning Time\e[0m: '${duration}"s; "
         fi
-    fi
 
+        unset STARTTIME
+    fi
     if [[ $exitStatus ]]; then
         print "\e[1;90m<<<\e[0m "$exitStatus
     fi
@@ -30,14 +35,12 @@ function myprecmd() {
     local pwdPrompt=" "$(~/.zsh/rc/pwd.py)
 
     local attrPrompt=" ("
-
     if [[ $OSTYPE == "darwin"* ]]; then
         local tags=$(tag -N . | tr ',' '|')
         if [[ $tags != "" ]]; then
             attrPrompt+=$'\e[47;30m'$tags$'\e[0m, '
         fi
     fi
-
     local items=(*(N))
     local hiddenItems=(.*(N))
     local itemNum=${#items}
@@ -45,7 +48,6 @@ function myprecmd() {
         itemNum+=$'%{\e[1;36m%}*%{\e[0m%}'
     fi
     attrPrompt+=$itemNum$' \e[90mitems\e[0m'
-
     attrPrompt+=")"
 
     local dirPrompt=$(~/.zsh/rc/dir.py)
@@ -60,9 +62,7 @@ function myprecmd() {
 
     local inputPrompt=$'\n%{\e[1;90m%}>>>%{\e[0m%} '
 
-    PROMPT=$PREPROMPT$pwdPrompt$attrPrompt$dirPrompt$venvPrompt$inputPrompt
-
-    LASTPWD=$PWD
+    PROMPT=$PREPROMPT$pwdPrompt$attrPrompt$dirPrompt$venvPrompt$updatePrompt$inputPrompt
 }
 if [[ -z $precmd_functions[myprecmd] ]]; then
     precmd_functions+=myprecmd;

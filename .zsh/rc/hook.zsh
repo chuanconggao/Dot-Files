@@ -12,12 +12,13 @@ function myprecmd() {
         exitStatus+=$'\e[4;91mExit Code\e[0m: '$exitCode"; "
     fi
 
-    if [[ $timer ]]; then
-        local duration=$(($SECONDS - $timer))
+    ENDTIME=$(date +%s)
+
+    if [[ $STARTTIME ]]; then
+        local duration=$(($ENDTIME - $STARTTIME))
         if [ ${duration} -gt 10 ]; then
             exitStatus+=$'\e[4;90mRunning Time\e[0m: '${duration}"s; "
         fi
-        unset timer
     fi
 
     if [[ $exitStatus ]]; then
@@ -60,6 +61,8 @@ function myprecmd() {
     local inputPrompt=$'\n%{\e[1;90m%}>>>%{\e[0m%} '
 
     PROMPT=$PREPROMPT$pwdPrompt$attrPrompt$dirPrompt$venvPrompt$inputPrompt
+
+    LASTPWD=$PWD
 }
 if [[ -z $precmd_functions[myprecmd] ]]; then
     precmd_functions+=myprecmd;
@@ -68,9 +71,9 @@ fi
 function mypreexec() {
     local currentTime=$(date +'%a %I:%M:%S %p')
     local paddingSize=$(($COLUMNS - ${#currentTime} - 2))
-    print "\e[1A""\e[${paddingSize}C""[\e[90m$currentTime\e[0m]"
+    print "\e[1A\e[${paddingSize}C[\e[90m$currentTime\e[0m]"
 
-    timer=$SECONDS
+    STARTTIME=$(date +%s)
 }
 if [[ -z $preexec_functions[mypreexec] ]]; then
     preexec_functions+=mypreexec;

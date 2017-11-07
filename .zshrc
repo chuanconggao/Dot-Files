@@ -37,9 +37,9 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 setopt EXTENDED_HISTORY
-setopt INC_APPEND_HISTORY
+setopt APPEND_HISTORY
 
-setopt PROMPTSUBST
+setopt PROMPT_SUBST
 
 setopt MENU_COMPLETE
 setopt AUTO_REMOVE_SLASH
@@ -53,8 +53,9 @@ unsetopt CASE_GLOB
 setopt EXTENDED_GLOB
 setopt NUMERIC_GLOB_SORT
 
-setopt MULTIOS
 setopt AUTO_CD
+
+setopt MULTIOS
 
 autoload run-help
 HELPDIR=/usr/local/share/zsh/helpfiles

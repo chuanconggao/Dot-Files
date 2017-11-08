@@ -20,6 +20,7 @@ zstyle ':completion:*' list-colors $LS_COLORS
 zstyle ':completion:*:*:*' menu yes select
 
 bindkey -e
+bindkey \^U backward-kill-line
 
 bindkey -M menuselect '^[[Z' reverse-menu-complete # SHIFT-TAB
 bindkey -M menuselect '\e' send-break # ESC

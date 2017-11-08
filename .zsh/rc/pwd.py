@@ -19,14 +19,14 @@ def colorDir(p):
 
 home = os.environ["HOME"]
 cwd = os.getcwd()
-if (cwd + '/').startswith(home + '/'):
+if cwd != '/' and (cwd + '/').startswith(home + '/'):
     cwd = '~' + cwd[len(home):]
 
-splits = cwd.rsplit('/', 1)
-if len(splits) == 1:
-    current_path, current_dir = "", splits[0]
+if cwd == '/' or cwd == '~':
+    current_path, current_dir = "", cwd
 else:
-    current_path, current_dir = splits[0] + '/', splits[1]
+    current_path, current_dir = cwd.rsplit('/', 1)
+    current_path += '/'
 
 print(
     colorPath(

@@ -7,8 +7,7 @@ zle_highlight=(default:fg=yellow)
 
 autoload -U zmv
 
-fpath=($HOME/.zsh/func $fpath)
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(/usr/local/share/zsh-completions $HOME/.zsh/func $fpath)
 typeset -U fpath
 
 autoload -U compinit && compinit
@@ -22,12 +21,10 @@ zstyle ':completion:*:*:*' menu yes select
 
 bindkey -e
 
-bindkey -M menuselect '^[[Z' reverse-menu-complete #SHIFT-TAB
-bindkey -M menuselect '\e' send-break #ESC
-bindkey -M menuselect '^[' send-break #CTRL-[
-bindkey -M menuselect '^M' .accept-line #ENTER
-
-bindkey \^U backward-kill-line
+bindkey -M menuselect '^[[Z' reverse-menu-complete # SHIFT-TAB
+bindkey -M menuselect '\e' send-break # ESC
+bindkey -M menuselect '^[' send-break # CTRL-[
+bindkey -M menuselect '^M' .accept-line # ENTER
 
 WORDCHARS=$(echo $WORDCHARS | tr -d "/.=_-")
 ZLE_REMOVE_SUFFIX_CHARS=$' \t\n;'
@@ -36,22 +33,20 @@ ZLE_SPACE_SUFFIX_CHARS=$'&|'
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
-setopt EXTENDED_HISTORY
 setopt APPEND_HISTORY
+setopt EXTENDED_HISTORY
 
-setopt PROMPT_SUBST
-
-setopt MENU_COMPLETE
 setopt AUTO_REMOVE_SLASH
-unsetopt MARK_DIRS
 setopt COMPLETE_ALIASES
 setopt COMPLETE_IN_WORD
 unsetopt LIST_TYPES
-unsetopt CASE_MATCH
 
-unsetopt CASE_GLOB
 setopt EXTENDED_GLOB
+setopt GLOB_STAR_SHORT
 setopt NUMERIC_GLOB_SORT
+unsetopt CASE_GLOB
+unsetopt CASE_MATCH
+unsetopt MARK_DIRS
 
 setopt AUTO_CD
 
@@ -71,12 +66,12 @@ export HOMEBREW_NO_ANALYTICS=1
 
 . ~/.zsh/rc/alias.zsh
 
-if [ -n "$VIRTUAL_ENV" ]; then
+if [[ $VIRTUAL_ENV != "" ]]; then
     . "$VIRTUAL_ENV/bin/activate"
 fi
 
 export AUTOJUMP_KEEP_SYMLINKS=1
-. $(brew --prefix)/etc/profile.d/autojump.sh
+. "$(brew --prefix)/etc/profile.d/autojump.sh"
 
 if [[ $OSTYPE == "darwin"* ]]; then
     ssh-add -A > /dev/null 2> /dev/null

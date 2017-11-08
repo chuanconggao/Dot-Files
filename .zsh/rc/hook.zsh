@@ -11,7 +11,7 @@ function myprecmd() {
         updatePrompt+=$' \e[90m•\e[0m'
     fi
 
-    ENDTIME=$(date +%s)
+    ENDTIME=$(date +%s.%N)
 
     local exitStatus=""
     if [[ $STARTTIME ]]; then
@@ -20,8 +20,8 @@ function myprecmd() {
         fi
 
         local duration=$(($ENDTIME - $STARTTIME))
-        if [ ${duration} -gt 10 ]; then
-            exitStatus+=$'\e[4;90mRunning Time\e[0m: '${duration}"s; "
+        if [[ ${duration} -gt 10 ]]; then
+            exitStatus+=$'\e[4;90mRunning Time\e[0m: '${duration%.*}"s; "
         fi
 
         unset STARTTIME
@@ -73,7 +73,7 @@ function mypreexec() {
     local paddingSize=$(($COLUMNS - ${#currentTime} - 2))
     print "\e[1A\e[${paddingSize}C[\e[90m$currentTime\e[0m]"
 
-    STARTTIME=$(date +%s)
+    STARTTIME=$(date +%s.%N)
 }
 if [[ -z $preexec_functions[mypreexec] ]]; then
     preexec_functions+=mypreexec;

@@ -4,7 +4,7 @@ import subprocess
 
 def parseGitStatus():
     output = subprocess.Popen(
-        ["git", "status", "-s", "-b", "--porcelain=2", "-z"],
+        ["git", "status", "-s", "-b", "--porcelain=2"],
         stdout=subprocess.PIPE, stderr=subprocess.DEVNULL
     ).communicate()[0].decode("utf-8")
     if output == "":
@@ -15,7 +15,7 @@ def parseGitStatus():
     ahead, behind = 0, 0
     modified, untracked = False, False
 
-    for line in output.rstrip('\0').split('\0'):
+    for line in output.rstrip('\n').split('\n'):
         if line[0] == '#':
             if line.startswith("# branch.head "):
                 branchName = line.rsplit(' ', 1)[1]
@@ -28,7 +28,12 @@ def parseGitStatus():
         elif line[0] == '?':
             untracked = True
         elif line[0] != '!':
-            s, c, m, u = line.split(' ')[2]
+            try:
+                s, c, m, u = line.split(' ')[2]
+            except:
+                print(line)
+                print()
+
             if s == 'N':
                 modified = True
             elif s == 'S':

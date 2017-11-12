@@ -13,7 +13,6 @@
 .ssh/id_rsa.pub
 .ssh/known_hosts
 
-.vim/bundle
 .vim/view
 
 .zsh/cache

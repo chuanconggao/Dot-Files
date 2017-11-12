@@ -224,7 +224,6 @@ let g:tagbar_sort = 0
 let g:tagbar_usearrows = 1
 let g:tagbar_iconchars = ['▸', '▾']
 
-let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:rootmarkers = ['.git', 'makefile', 'build.xml']
@@ -245,7 +244,7 @@ let g:ycm_seed_identifiers_with_syntax = 0
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 
-let g:languagetool_jar = '/usr/local/Cellar/languagetool/3.9/libexec/languagetool-commandline.jar'
+let g:grammarous#languagetool_cmd = 'languagetool'
 
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#444444 ctermbg=238

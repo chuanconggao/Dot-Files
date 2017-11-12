@@ -17,8 +17,8 @@ def colorPath(p):
 def colorDir(p):
     return f"\x1b[1;94m{p}\x1b[0m"
 
-home = os.environ["HOME"]
-cwd = os.getcwd()
+home = os.getenv("HOME")
+cwd = os.getenv('PWD')
 if cwd != '/' and (cwd + '/').startswith(home + '/'):
     cwd = '~' + cwd[len(home):]
 

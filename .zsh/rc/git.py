@@ -28,17 +28,10 @@ def parseGitStatus():
         elif line[0] == '?':
             untracked = True
         elif line[0] != '!':
-            try:
-                s, c, m, u = line.split(' ')[2]
-            except:
-                print(line)
-                print()
+            s, _, _, u = line.split(' ')[2]
+            flag = s == 'S' and u == 'U'
 
-            if s == 'N':
-                modified = True
-            elif s == 'S':
-                modified = modified or c == 'C' or m == 'M'
-                untracked = untracked or u == 'U'
+            modified, untracked = modified or not flag, untracked or flag
 
     return (branch, hasRemote, ahead, behind, modified, untracked)
 

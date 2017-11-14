@@ -1,7 +1,9 @@
 scriptencoding utf-8
 
-unlet! skip_defaults_vim
-source $VIMRUNTIME/defaults.vim
+if !has('nvim')
+    unlet! skip_defaults_vim
+    source $VIMRUNTIME/defaults.vim
+endif
 
 if !has("gui_running")
     set t_Co=256

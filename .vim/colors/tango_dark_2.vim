@@ -45,16 +45,18 @@ hi Type gui=none guifg=#FFD75F cterm=none ctermfg=221
 
 hi MatchParen gui=none guibg=#AF87FF guifg=#1C1C1C cterm=none ctermbg=141 ctermfg=234
 
-hi StatusLine gui=bold guibg=#D0D0D0 guifg=#1C1C1C cterm=bold ctermbg=252 ctermfg=234
-hi StatusLineNC gui=bold guibg=#808080 guifg=#1C1C1C cterm=bold ctermbg=244 ctermfg=234
+hi StatusLine gui=none guibg=#D0D0D0 guifg=#1C1C1C cterm=none ctermbg=252 ctermfg=234
+hi StatusLineBold gui=bold guibg=#D0D0D0 guifg=#1C1C1C cterm=bold ctermbg=252 ctermfg=234
+hi StatusLineNC gui=none guibg=#808080 guifg=#1C1C1C cterm=none ctermbg=244 ctermfg=234
 
 hi PmenuSel gui=bold guibg=#D0D0D0 guifg=#1C1C1C cterm=bold ctermbg=252 ctermfg=234
 hi Pmenu gui=bold guibg=#808080 guifg=#1C1C1C cterm=bold ctermbg=244 ctermfg=234
 hi! link PmenuThumb PmenuSel
 hi! link PmenuSbar Pmenu
 
-hi! TabLine gui=none guibg=#808080 cterm=none ctermbg=8 ctermfg=15
+hi! TabLine gui=bold guibg=#808080 cterm=bold ctermbg=8 ctermfg=15
 hi! TabLineSel gui=bold cterm=bold
+hi! link TabLineFill StatusLine
 
-hi IndentGuidesOdd  guibg=#444444 ctermbg=238
+hi IndentGuidesOdd guibg=#444444 ctermbg=238
 hi IndentGuidesEven guibg=#303030 ctermbg=236

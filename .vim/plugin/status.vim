@@ -1,25 +1,19 @@
 function! FileStatus()
     let label = ""
+    if getbufvar(bufname(""), "&readonly")
+        let label .= "!"
+    endif
     if getbufvar(bufname(""), "&modified")
-        if label != ""
-            let label .= ", "
-        endif
         let label .= "+"
     endif
-    if getbufvar(bufname(""), "&readonly")
-        if label != ""
-            let label .= ", "
-        endif
-        let label .= "RO"
-    endif
+
     if !getbufvar(bufname(""), "&modifiable")
-        if label != ""
-            let label .= ", "
-        endif
-        let label .= "-"
+        let label = "-"
+
     endif
+
     if label != ""
-        return " [" . label . "]"
+        return " " . label
     endif
     return label
 endfunction
@@ -49,4 +43,4 @@ function! TotalCharNumText()
 endfunction
 
 set laststatus=2
-set statusline=%t%{FileStatus()}\ [%{&fileformat},\ %{(&fenc==\"\"?&enc:&fenc)}]\ %{ModifiedTimeStatuslineText()}%=[%l%{TotalLineNumText()},\ %v]
+set statusline=%#StatusLineBold#%t%{FileStatus()}%#StatusLine#\ (%{&fileformat},\ %{(&fenc==\"\"?&enc:&fenc)})\ %{ModifiedTimeStatuslineText()}%=[%l%{TotalLineNumText()},\ %v]

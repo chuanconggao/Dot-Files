@@ -36,9 +36,9 @@ function myprecmd() {
 
     local attrPrompt=" ("
     if [[ $OSTYPE == "darwin"* ]]; then
-        local tags=$(tag -N . | tr ',' '|')
+        local tags=$(tag -N . | sed -e 's/,/'$'\e[0m+\e[103;30m''/g')
         if [[ $tags != "" ]]; then
-            attrPrompt+=$'\e[47;30m'$tags$'\e[0m, '
+            attrPrompt+=$'\e[103;30m'$tags$'\e[0m'", "
         fi
     fi
     local items=(*(N))

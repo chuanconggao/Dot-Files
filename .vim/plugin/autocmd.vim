@@ -1,6 +1,6 @@
 autocmd BufWinLeave * if expand("%") != "" | mkview | endif
-autocmd BufWinEnter * if expand("%") != "" | loadview | endif
-autocmd BufEnter * if expand('%:p') =~ '^/' | :lcd %:p:h | endif
+autocmd BufWinEnter * if expand("%") != "" | silent! loadview | endif
+autocmd BufEnter * if expand('%:p') =~ '^/' | lcd %:p:h | endif
 
 autocmd InsertLeave,TextChanged * if &diff == 1 | diffupdate | endif
 

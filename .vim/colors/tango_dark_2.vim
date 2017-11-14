@@ -9,7 +9,7 @@ if exists("syntax-on")
     syntax reset
 endif
 
-let colors_name = "tango_dark"
+let g:colors_name = "tango_dark_2"
 
 hi Normal gui=none guibg=#1C1C1C guifg=#E5E5E5 cterm=none ctermbg=234 ctermfg=254
 hi! link Conceal Normal
@@ -55,3 +55,6 @@ hi! link PmenuSbar Pmenu
 
 hi! TabLine gui=none guibg=#808080 cterm=none ctermbg=8 ctermfg=15
 hi! TabLineSel gui=bold cterm=bold
+
+hi IndentGuidesOdd  guibg=#444444 ctermbg=238
+hi IndentGuidesEven guibg=#303030 ctermbg=236

@@ -1,8 +1,10 @@
+let g:tex_flavor = "latex"
+
 syn region texComment start="\\begin{comment}" end="\\end{comment}"
 
-setlocal spell
+let g:syntastic_tex_checkers = ['chktex']
 
-let g:tex_flavor = "latex"
+setlocal spell
 
 vnoremap <buffer> <D-U> di\underline{}<ESC><S-p>
 vnoremap <buffer> <D-I> di\textit{}<ESC><S-p>
@@ -13,12 +15,9 @@ nnoremap <buffer> <S-D-Enter> :silent !/Applications/Skim.app/Contents/SharedSup
 nnoremap <buffer> <F5> :up<CR>:ProjectRootExe silent make!<CR>:bo cw<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-r>=line('.')<CR> "%<.pdf" "%"<CR>
 nnoremap <buffer> <F6> :up<CR>:ProjectRootExe silent make!<CR>:bo cw<CR>:silent !open "%<.pdf"<CR>
 
-nnoremap <buffer> <F9> :LanguageToolCheck<CR>
-vnoremap <buffer> <F9> :LanguageToolCheck<CR>
-nnoremap <buffer> <F10> :LanguageToolClear<CR>
-
-nnoremap <buffer> <F11> :cp<CR>
-nnoremap <buffer> <F12> :cn<CR>
+nnoremap <buffer> <F7> :LanguageToolCheck<CR>
+vnoremap <buffer> <F7> :LanguageToolCheck<CR>
+nnoremap <buffer> <F8> :LanguageToolClear<CR>
 
 call textobj#user#plugin('tex', {
 \   'environment': {

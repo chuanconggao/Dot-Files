@@ -56,9 +56,6 @@ set wildmenu
 
 set suffixes=~,.bak,.tmp,.swp
 
-set selectmode=
-set keymodel=startsel,stopsel
-
 set shortmess=a
 
 set undofile

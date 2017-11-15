@@ -90,6 +90,8 @@ nmap <Leader>fw :ArgWrap<CR>
 nmap <Leader>ly :call setreg('*', line('.'))<CR>
 nmap <Leader>lg :<C-r>*<CR>
 
+let g:user_emmet_leader_key='<C-Tab>'
+
 nmap <C-l> :noh<CR>:redraw!<CR>
 
 nmap z<Tab> <Plug>IndentGuidesToggle

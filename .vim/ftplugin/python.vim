@@ -10,4 +10,3 @@ else
     let b:syntastic_python_python_exec = '/usr/local/bin/python'
     let b:syntastic_python_pylint_exec = '/usr/local/bin/pylint'
 endif
-set colorcolumn=80

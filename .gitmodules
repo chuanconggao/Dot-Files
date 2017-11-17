@@ -146,3 +146,6 @@
 	path = .vim/bundle/vim-snippets
 	url = https://github.com/honza/vim-snippets
 	ignore = untracked
+[submodule ".vim/bundle/MatchTagAlways"]
+	path = .vim/bundle/MatchTagAlways
+	url = https://github.com/Valloric/MatchTagAlways

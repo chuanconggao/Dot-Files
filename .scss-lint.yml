@@ -1,3 +1,6 @@
 linters:
     Indentation:
         enabled: false
+
+    PropertySortOrder:
+        enabled: false

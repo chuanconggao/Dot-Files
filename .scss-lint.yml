@@ -4,3 +4,6 @@ linters:
 
     PropertySortOrder:
         enabled: false
+
+    IdSelector:
+        enabled: false

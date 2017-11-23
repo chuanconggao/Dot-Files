@@ -4,17 +4,31 @@ import os
 from pathlib import Path
 
 from colors import color
+
 from git import parseGitStatus
 
+
 def isFile(*files):
-    for f in files:
-        p = Path(f)
-        return p.exists() and p.is_file()
+    return any(
+        Path(f).is_file()
+        for f in files
+    )
+
+
+def matchFile(*exts):
+    return any(
+        f.suffix in exts
+        for f in Path('.').iterdir()
+        if f.is_file()
+    )
+
 
 def isDir(*dirs):
-    for d in dirs:
-        p = Path(d)
-        return p.exists() and p.is_dir()
+    return any(
+        Path(d).is_dir()
+        for d in dirs
+    )
+
 
 def getGitPrompt():
     status = parseGitStatus()
@@ -59,6 +73,7 @@ def getGitPrompt():
 
     return gitPrompt
 
+
 def getDirPrompt():
     conditions = [
         ("direnv", os.environ.get("DIRENV_DIR"), None),
@@ -72,6 +87,7 @@ def getDirPrompt():
             ("npm", lambda: True),
         ]),
         ("bower", isDir("bower_components"), None),
+        ("scss", matchFile(".scss"), None),
     ]
 
     return " | ".join(
@@ -80,6 +96,7 @@ def getDirPrompt():
         ), fg="yellow")
         for tag, cond, sub in conditions if cond
     )
+
 
 print(" | ".join(
     p for p in [getGitPrompt(), getDirPrompt()] if len(p) > 0

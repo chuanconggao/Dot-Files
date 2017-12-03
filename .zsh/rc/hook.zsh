@@ -35,12 +35,7 @@ function myprecmd() {
     local pwdPrompt=" "$(~/.zsh/rc/pwd.py)
 
     local attrPrompt=" ("
-    if [[ $OSTYPE == "darwin"* ]]; then
-        local tags=$(tag -N . | sed -e 's/,/'$'\e[0m+\e[103;30m''/g')
-        if [[ $tags != "" ]]; then
-            attrPrompt+=$'\e[103;30m'$tags$'\e[0m'", "
-        fi
-    fi
+
     local items=(*(N))
     local hiddenItems=(.*(N))
     local itemNum=${#items}
@@ -48,6 +43,14 @@ function myprecmd() {
         itemNum+=$'%{\e[1;36m%}*%{\e[0m%}'
     fi
     attrPrompt+=$itemNum$' \e[90mitems\e[0m'
+
+    if [[ $OSTYPE == "darwin"* ]]; then
+        local tags=$(tag -N . | sed -e 's/,/'$'\e[0m+\e[103;30m''/g')
+        if [[ $tags != "" ]]; then
+            attrPrompt+=", "$'\e[103;30m'$tags$'\e[0m'
+        fi
+    fi
+
     attrPrompt+=")"
 
     local dirPrompt=$(~/.zsh/rc/dir.py)

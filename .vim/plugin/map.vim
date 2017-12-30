@@ -1,3 +1,5 @@
+call yankstack#setup()
+
 cmap <C-a> <Home>
 cmap <C-e> <End>
 cmap <C-b> <Left>
@@ -24,7 +26,7 @@ noremap g0 0
 noremap g^ ^
 noremap g$ $
 
-nmap Y y$
+nnoremap Y y$
 
 vnoremap <silent> * :<C-U>
     \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>

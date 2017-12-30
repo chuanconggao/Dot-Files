@@ -1,7 +1,7 @@
 alias less="less -R"
 alias more="more -R"
 
-alias ls="ls --color=auto -h -v"
+alias ls="ls --color=auto -h"
 alias ll="ls -l"
 alias du="du -h"
 alias df="df -h"

@@ -15,14 +15,6 @@ def isFile(*files):
     )
 
 
-def matchFile(*exts):
-    return any(
-        f.suffix in exts
-        for f in Path('.').iterdir()
-        if f.is_file()
-    )
-
-
 def isDir(*dirs):
     return any(
         Path(d).is_dir()
@@ -87,7 +79,7 @@ def getDirPrompt():
             ("npm", lambda: True),
         ]),
         ("bower", isDir("bower_components"), None),
-        ("scss", matchFile(".scss"), None),
+        ("mvn", isFile("pom.xml"), None),
     ]
 
     return " | ".join(

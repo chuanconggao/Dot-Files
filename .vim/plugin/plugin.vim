@@ -59,6 +59,7 @@ let g:tagbar_type_markdown = {
 
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ["python", "pylint"]
+let g:syntastic_python_mypy_args = "--ignore-missing-imports"
 let g:syntastic_scala_checkers = ["fsc", "scalastyle"]
 let g:syntastic_scala_scalastyle_config_file = "~/.scalastyle_config.xml"
 let g:syntastic_scala_scalastyle_jar = "/usr/local/Cellar/scalastyle/1.0.0/libexec/scalastyle_2.12-1.0.0-batch.jar"
@@ -70,8 +71,7 @@ let g:showmarks_marks = "abcdefghijklmnopqrstuvwxyz"
 let g:vim_markdown_folding_disabled = 1
 
 let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_color_change_percent = 5
-let g:indent_guides_auto_colors = 0
+let g:indent_guides_color_change_percent = 10
 
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_filetype_blacklist = {}
@@ -82,4 +82,4 @@ let g:ycm_seed_identifiers_with_syntax = 0
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 
-let g:languagetool_jar = "/usr/local/Cellar/languagetool/latest/libexec/languagetool-commandline.jar"
+let g:languagetool_jar = "/usr/local/Cellar/languagetool/4.0/libexec/languagetool-commandline.jar"

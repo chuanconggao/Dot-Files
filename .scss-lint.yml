@@ -7,3 +7,9 @@ linters:
 
     IdSelector:
         enabled: false
+
+    NameFormat:
+        enabled: false
+
+    SelectorFormat:
+        enabled: false

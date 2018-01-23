@@ -60,10 +60,10 @@ set spellsuggest=best,10
 set hlsearch
 set incsearch
 
-colorscheme tango_dark_2
-
 runtime macros/matchit.vim
 
 runtime bundle/pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 call pathogen#helptags()
+
+colorscheme tango_dark_2

@@ -16,12 +16,31 @@ function myprecmd() {
     local exitStatus=""
     if [[ $STARTTIME ]]; then
         if [[ $exitCode -ne 0 ]]; then
-            exitStatus+=$'\e[4;91mExit Code\e[0m: '$exitCode"; "
+            local exitMessage=""
+            case $exitCode in
+                1) exitMessage="General";;
+                2) exitMessage="Shell";;
+                126) exitMessage="Unexecutable";;
+                127) exitMessage="Unfound";;
+                129) exitMessage="SIGHUP";;
+                130) exitMessage="SIGINT";;
+                131) exitMessage="SIGQUIT";;
+                132) exitMessage="SIGILL";;
+                133) exitMessage="SIGTRAP";;
+                134) exitMessage="SIGABRT";;
+                137) exitMessage="SIGKILL";;
+                139) exitMessage="SIGSEGV";;
+                141) exitMessage="SIGPIPE";;
+                143) exitMessage="SIGTERM";;
+                *) exitMessage="Unknown";;
+            esac
+
+            exitStatus+=$'\e[4;91mCode\e[0m: '$exitCode" ("$'\e[1;90m'$exitMessage$'\e[0m); '
         fi
 
         local duration=$(($ENDTIME - $STARTTIME))
         if [[ ${duration} -gt 10 ]]; then
-            exitStatus+=$'\e[4;90mRunning Time\e[0m: '${duration%.*}"s; "
+            exitStatus+=$'\e[4;90mDuration\e[0m: '${duration%.*}"s; "
         fi
 
         unset STARTTIME

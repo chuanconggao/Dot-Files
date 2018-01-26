@@ -3,11 +3,15 @@ scriptencoding utf-8
 if !has('nvim')
     unlet! skip_defaults_vim
     source $VIMRUNTIME/defaults.vim
+
+    set ttymouse=xterm2
 endif
 
 if !has("gui_running")
     set t_Co=256
 endif
+
+set mouse=a
 
 set cursorline
 set number

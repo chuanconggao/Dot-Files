@@ -16,8 +16,6 @@ alias py="python"
 alias py3="python3"
 alias ipy="ipython"
 alias ipy3="ipython3"
-alias ipyspark="IPYTHON=1 pyspark"
-alias pypyspark="PYSPARK_PYTHON=pypy pyspark"
 
 alias ql="qlmanage -p $@ > /dev/null 2> /dev/null"
 
@@ -32,7 +30,6 @@ alias q="q --disable-escaped-double-quoting"
 
 alias jojo="/usr/local/bin/jo"
 alias pythonpy="/usr/local/bin/py"
-alias pythonpy3="/usr/local/bin/py"
 
 alias ack="ag"
 alias gzip="pigz"

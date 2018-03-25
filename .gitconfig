@@ -1,12 +1,10 @@
-[push]
-    default = simple
-
 [fetch]
     prune = true
 
 [core]
     excludesfile = ~/.gitignore_global
     editor = vim
+    ignorecase = false
 
 [credential]
     helper = osxkeychain

@@ -29,6 +29,7 @@ hi MatchParen gui=none guibg=#AF87FF guifg=#1C1C1C cterm=none ctermbg=141 ctermf
 hi! link CurrentWord MatchParen
 
 hi Comment gui=italic guifg=#9E9E9E cterm=none ctermfg=247
+hi StrongComment gui=italic guifg=#1C1C1C guibg=#9E9E9E cterm=none ctermfg=234 ctermbg=247
 
 hi Constant gui=italic guifg=#FF5F5F cterm=none ctermfg=203
 hi String gui=italic guifg=#D7FF87 cterm=none ctermfg=192

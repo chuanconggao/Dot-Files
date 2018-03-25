@@ -11,3 +11,6 @@ autocmd BufNewFile,BufRead *.md setlocal filetype=pandoc
 autocmd BufNewFile,BufRead *.markdown setlocal filetype=pandoc
 autocmd BufNewFile,BufRead *.url setlocal filetype=url
 autocmd BufNewFile,BufRead *.sh setlocal iskeyword-=_
+
+hi! link Shebang StrongComment
+autocmd BufNewFile,BufRead * syn match Shebang '\%1l^#\!\s*.*'

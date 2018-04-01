@@ -62,7 +62,7 @@ nmap <Leader>cr :ProjectRootCD<CR>
 
 if has("mac")
     nmap <Leader>of :silent !open "%:h"<Return>
-    nmap <Leader>ot :silent !open -a iTerm.app "%:h"<Return>
+    nmap <Leader>os :silent !open -a iTerm.app "%:h"<Return>
     if !has("gui_macvim")
         nmap <Leader>ov :up<CR>:silent !mvim "%"<Return>
     endif

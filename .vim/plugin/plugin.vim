@@ -82,4 +82,4 @@ let g:ycm_seed_identifiers_with_syntax = 0
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 
-let g:languagetool_jar = "/usr/local/Cellar/languagetool/4.0/libexec/languagetool-commandline.jar"
+let g:languagetool_jar = "/usr/local/Cellar/languagetool/4.1/libexec/languagetool-commandline.jar"

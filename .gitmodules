@@ -152,3 +152,6 @@
 [submodule ".vim/bundle/vim-css-color"]
 	path = .vim/bundle/vim-css-color
 	url = https://github.com/ap/vim-css-color
+[submodule ".zsh/plugins/zsh-bd"]
+	path = .zsh/plugins/zsh-bd
+	url = https://github.com/Tarrasch/zsh-bd

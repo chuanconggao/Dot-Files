@@ -36,6 +36,7 @@ SAVEHIST=10000
 HISTFILE=~/.zsh_history
 setopt APPEND_HISTORY
 setopt EXTENDED_HISTORY
+setopt INC_APPEND_HISTORY
 
 setopt AUTO_REMOVE_SLASH
 setopt COMPLETE_ALIASES
@@ -83,7 +84,7 @@ eval "$(npm completion)"
 eval "$(direnv hook zsh)"
 . ~/.zsh/rc/hook.zsh
 
-. ~/.zsh/plugins/bd/bd.zsh
+. ~/.zsh/plugins/zsh-bd/bd.zsh
 
 if [[ $OSTYPE == "darwin"* ]]; then
     . /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -103,4 +104,3 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 test -e "${HOME}/.iterm2.zsh" && source "${HOME}/.iterm2.zsh"
-

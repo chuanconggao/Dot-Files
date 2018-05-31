@@ -11,11 +11,14 @@ def prepare(d, shorten=True):
         ('*' if shorten else '')
     )
 
+
 def colorPath(p):
     return f"\x1b[1;34m{p}\x1b[0m"
 
+
 def colorDir(p):
     return f"\x1b[1;94m{p}\x1b[0m"
+
 
 home = os.getenv("HOME")
 cwd = os.getenv('PWD')

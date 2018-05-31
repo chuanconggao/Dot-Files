@@ -2,9 +2,14 @@ if !filereadable("makefile")
     setlocal makeprg=pandoc\ \\"%\\"\ -o\ \\"%<\\".pdf
 endif
 
+setlocal linebreak
+
 setlocal spell
 
-nnoremap <buffer> <F5> :up<CR>:make!<CR>:bo cw<CR>:silent !open "%<".pdf<CR>
+syntax spell toplevel
+
+nnoremap <buffer> <F5> :up<CR>:silent !open -a Markoff "%"<CR>
+nnoremap <buffer> <F6> :up<CR>:make!<CR>:bo cw<CR>:silent !open "%<".pdf<CR>
 
 call textobj#user#plugin('pandoc', {
 \  'display-math': {

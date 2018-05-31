@@ -42,14 +42,6 @@
 	path = .vim/bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript
 	ignore = untracked
-[submodule ".vim/bundle/vim-pandoc-after"]
-	path = .vim/bundle/vim-pandoc-after
-	url = https://github.com/vim-pandoc/vim-pandoc-after
-	ignore = untracked
-[submodule ".vim/bundle/vim-pandoc"]
-	path = .vim/bundle/vim-pandoc
-	url = https://github.com/vim-pandoc/vim-pandoc
-	ignore = untracked
 [submodule ".vim/bundle/vim-multiple-cursors"]
 	path = .vim/bundle/vim-multiple-cursors
 	url = https://github.com/terryma/vim-multiple-cursors
@@ -57,10 +49,6 @@
 [submodule ".vim/bundle/vim-pathogen"]
 	path = .vim/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen
-	ignore = untracked
-[submodule ".vim/bundle/vim-pandoc-syntax"]
-	path = .vim/bundle/vim-pandoc-syntax
-	url = https://github.com/vim-pandoc/vim-pandoc-syntax
 	ignore = untracked
 [submodule ".vim/bundle/vim-projectroot"]
 	path = .vim/bundle/vim-projectroot
@@ -149,9 +137,20 @@
 [submodule ".vim/bundle/MatchTagAlways"]
 	path = .vim/bundle/MatchTagAlways
 	url = https://github.com/Valloric/MatchTagAlways
+	ignore = untracked
 [submodule ".vim/bundle/vim-css-color"]
 	path = .vim/bundle/vim-css-color
 	url = https://github.com/ap/vim-css-color
+	ignore = untracked
 [submodule ".zsh/plugins/zsh-bd"]
 	path = .zsh/plugins/zsh-bd
 	url = https://github.com/Tarrasch/zsh-bd
+	ignore = untracked
+[submodule ".vim/bundle/python-syntax"]
+	path = .vim/bundle/python-syntax
+	url = https://github.com/vim-python/python-syntax
+	ignore = untracked
+[submodule ".vim/bundle/vim-markdown"]
+	path = .vim/bundle/vim-markdown
+	url = https://github.com/plasticboy/vim-markdown
+	ignore = untracked

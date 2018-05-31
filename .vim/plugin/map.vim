@@ -11,20 +11,12 @@ imap <C-f> <Right>
 imap <C-d> <C-o>x
 imap <C-k> <C-o><S-d>
 
-noremap j gj
-noremap k gk
 noremap <Up> g<Up>
-noremap <Down> g<Down>
-noremap 0 g0
-noremap ^ g^
-noremap $ g$
-noremap gj j
-noremap gk k
 noremap g<Up> <Up>
+imap <Up> <C-o>gk
+noremap <Down> g<Down>
 noremap g<Down> <Down>
-noremap g0 0
-noremap g^ ^
-noremap g$ $
+imap <Down> <C-o>gj
 
 nnoremap Y y$
 
@@ -88,6 +80,9 @@ nmap <Leader>p <Plug>yankstack_substitute_older_paste
 nmap <Leader>P <Plug>yankstack_substitute_newer_paste
 
 nmap <Leader>fw :ArgWrap<CR>
+
+nmap <Leader>ft :Tabularize /
+vmap <Leader>ft :Tabularize /
 
 nmap <Leader>ly :call setreg('*', line('.'))<CR>
 nmap <Leader>lg :<C-r>*<CR>

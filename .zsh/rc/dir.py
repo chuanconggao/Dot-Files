@@ -50,7 +50,7 @@ def getGitPrompt():
         if behind > 0:
             flags += color('!', fg="cyan", style="bold")
 
-        if len(flags) > 0:
+        if flags:
             gitPrompt += '/' + flags
 
     flags = ""
@@ -60,7 +60,7 @@ def getGitPrompt():
     if untracked:
         flags += color('?', fg="cyan", style="bold")
 
-    if len(flags) > 0:
+    if flags:
         gitPrompt += ':' + flags
 
     return gitPrompt
@@ -71,7 +71,7 @@ def getDirPrompt():
         ("direnv", os.environ.get("DIRENV_DIR"), None),
         ("make", isFile("makefile"), None),
         (None, isFile("requirements.txt", "Pipfile"), [
-            ("pipenv", lambda: isFile("Pipfile.lock")),
+            ("pipenv", lambda: isFile("Pipfile")),
             ("pip", lambda: True),
         ]),
         (None, isDir("node_modules") or isFile("package.json"), [
@@ -80,6 +80,7 @@ def getDirPrompt():
         ]),
         ("bower", isDir("bower_components"), None),
         ("mvn", isFile("pom.xml"), None),
+        ("mkdocs", isFile("mkdocs.yml"), None),
     ]
 
     return " | ".join(

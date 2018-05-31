@@ -7,3 +7,6 @@ Thumbs.db
 .sass-cache
 .mypy_cache
 __pycache__
+*.py[cod]
+
+*.bak

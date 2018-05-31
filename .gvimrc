@@ -7,7 +7,7 @@ set lines=40 columns=160
 set fuoptions=maxvert,maxhorz
 
 if has("gui_macvim")
-    set transparency=15
+    set transparency=10
     set blur=12
 
     set guicursor=a:blinkwait500-blinkon500-blinkoff500

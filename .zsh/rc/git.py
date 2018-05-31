@@ -35,5 +35,6 @@ def parseGitStatus():
 
     return (branch, hasRemote, ahead, behind, modified, untracked)
 
+
 if __name__ == "__main__":
     print(parseGitStatus())

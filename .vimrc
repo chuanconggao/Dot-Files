@@ -64,6 +64,8 @@ set spellsuggest=best,10
 set hlsearch
 set incsearch
 
+set virtualedit=block
+
 runtime macros/matchit.vim
 
 runtime bundle/pathogen/autoload/pathogen.vim

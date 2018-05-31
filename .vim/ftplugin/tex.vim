@@ -4,7 +4,11 @@ syn region texComment start="\\begin{comment}" end="\\end{comment}"
 
 let g:syntastic_tex_checkers = ['chktex']
 
+setlocal linebreak
+
 setlocal spell
+
+syntax spell toplevel
 
 vnoremap <buffer> <D-U> di\underline{}<ESC><S-p>
 vnoremap <buffer> <D-I> di\textit{}<ESC><S-p>

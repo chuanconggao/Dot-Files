@@ -154,3 +154,6 @@
 	path = .vim/bundle/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown
 	ignore = untracked
+[submodule ".vim/bundle/vim-livedown"]
+	path = .vim/bundle/vim-livedown
+	url = https://github.com/shime/vim-livedown

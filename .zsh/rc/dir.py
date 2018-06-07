@@ -4,9 +4,7 @@ import os
 from pathlib import Path
 
 from colors import color
-
-from git import parseGitStatus
-
+from extratools import gittools
 
 def isFile(*files):
     return any(
@@ -23,11 +21,16 @@ def isDir(*dirs):
 
 
 def getGitPrompt():
-    status = parseGitStatus()
+    status = gittools.status()
     if status is None:
         return ""
 
-    (branch, hasRemote, ahead, behind, modified, untracked) = status
+    branch = status["branch"]["head"]
+    hasRemote = status["branch"]["upstream"] is not None
+    ahead = status["commits"]["ahead"]
+    behind = status["commits"]["behind"]
+    modified = bool(status["files"]["modified"])
+    untracked = bool(status["files"]["untracked"])
 
     gitPrompt = color("git", fg="yellow")
 

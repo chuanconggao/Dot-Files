@@ -1,4 +1,4 @@
-.aws/credentials
+.aws
 
 .config/hub
 
@@ -7,11 +7,7 @@
 .ipython/profile_default/history.sqlite
 .ipython3/profile_default/history.sqlite
 
-.pypirc
-
-.ssh/id_rsa
-.ssh/id_rsa.pub
-.ssh/known_hosts
+.ssh
 
 .vim/view
 

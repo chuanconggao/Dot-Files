@@ -1,7 +1,7 @@
-set linespace=2
+set linespace=3
 set guifont=Consolas:h14
 
-set guioptions=ce
+set guioptions=c
 
 set lines=40 columns=160
 set fuoptions=maxvert,maxhorz

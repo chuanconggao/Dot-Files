@@ -14,3 +14,7 @@ else
     let b:syntastic_python_python_exec = '/usr/local/bin/python'
     let b:syntastic_python_pylint_exec = '/usr/local/bin/pylint'
 endif
+
+let b:venv = system("pushd " . expand("%:p:h") . " > /dev/null && pipenv --venv 2> /dev/null | head -c -1")
+let b:venvlib = system("ls -d \"" . b:venv . "/lib/python\"*\"/site-packages\" | head -c -1")
+let b:syntastic_python_pylint_post_args="--init-hook=\"import sys; sys.path.insert(0, '". b:venvlib . "')\""

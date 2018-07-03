@@ -14,6 +14,7 @@ alias dtrx="dtrx -n"
 
 alias py="python"
 alias py3="python3"
+alias ipython3="ipython"
 alias ipy="ipython"
 alias ipy3="ipython3"
 

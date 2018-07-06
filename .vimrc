@@ -48,6 +48,8 @@ set whichwrap=<,>,[,]
 
 set completeopt=menuone
 
+set directory=~/.vim/swap//
+
 set history=1000
 
 set viminfo='1000

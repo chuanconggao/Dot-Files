@@ -157,3 +157,6 @@
 [submodule ".vim/bundle/vim-livedown"]
 	path = .vim/bundle/vim-livedown
 	url = https://github.com/shime/vim-livedown
+[submodule ".vim/bundle/vim-gitgutter"]
+	path = .vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter

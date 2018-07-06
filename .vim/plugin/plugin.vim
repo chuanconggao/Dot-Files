@@ -88,3 +88,5 @@ let g:python_highlight_all = 1
 
 let g:vim_markdown_math = 1
 let g:vim_markdown_no_extensions_in_markdown = 1
+
+let g:gitgutter_max_signs = 1000

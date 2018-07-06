@@ -9,6 +9,7 @@
 
 .ssh
 
+.vim/swap
 .vim/view
 
 .zsh/cache

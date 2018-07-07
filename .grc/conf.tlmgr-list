@@ -1,0 +1,3 @@
+regexp=^(?:(i)| ) (\S+)\b(?=:)
+colours=white,green,blue
+count=once

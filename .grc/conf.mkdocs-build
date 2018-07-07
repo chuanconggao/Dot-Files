@@ -1,0 +1,9 @@
+# INFO
+regexp=^INFO\b
+colours=blue
+count=once
+-
+# DEBUG
+regexp=^DEBUG\b
+colours=cyan
+count=once

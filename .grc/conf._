@@ -1,0 +1,29 @@
+# string
+regexp='[^']*'|"[^"]*"|`[^`]*`
+colours=green italic
+count=more
+-
+# path
+regexp=(?:(?<=\W)|^)~?/[^/\s'"`][^\s'"`]+(?:/|\b|$)
+colours=blue
+count=more
+-
+# url
+regexp=(?:\b|^)\w+://[^/\s][^\s'"`]+(?:/|\b|$)
+colours=blue
+count=more
+-
+# filename/host
+regexp=(?:\b|^)(?<![/.])(?:localhost|(?:[-\w]+\.)+[a-z]+)(?![/.])(?:\b|$)
+colours=blue
+count=more
+-
+# ip
+regexp=(?:\b|^)(?<!\.)(?:\d+\.){3}\d+(?!\.)(?:\b|$)
+colours=blue
+count=more
+-
+# email
+regexp=(?:\b|^)[^\s'"`@]+@[^\s'"`@]+(?:\b|$)
+colours=blue
+count=more

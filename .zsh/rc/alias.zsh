@@ -1,3 +1,6 @@
+alias g="grc -e -s --colour=on"
+alias gg="g -c conf._"
+
 alias less="less -R"
 alias more="more -R"
 

@@ -13,11 +13,6 @@ regexp=(?:\b|^)\w+://[^/\s][^\s'"`]+(?:/|\b|$)
 colours=blue
 count=more
 -
-# filename/host
-regexp=(?:\b|^)(?<![/.])(?:localhost|(?:[-\w]+\.)+[a-z]+)(?![/.])(?:\b|$)
-colours=blue
-count=more
--
 # ip
 regexp=(?:\b|^)(?<!\.)(?:\d+\.){3}\d+(?!\.)(?:\b|$)
 colours=blue

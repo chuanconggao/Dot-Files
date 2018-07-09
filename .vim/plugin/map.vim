@@ -11,12 +11,12 @@ imap <C-f> <Right>
 imap <C-d> <C-o>x
 imap <C-k> <C-o><S-d>
 
-noremap <Up> g<Up>
-noremap g<Up> <Up>
-imap <Up> <C-o>gk
-noremap <Down> g<Down>
-noremap g<Down> <Down>
-imap <Down> <C-o>gj
+noremap <Up> gk
+noremap g<Up> k
+inoremap <Up> <C-o>gk
+noremap <Down> gj
+noremap g<Down> j
+inoremap <Down> <C-o>gj
 
 nnoremap Y y$
 

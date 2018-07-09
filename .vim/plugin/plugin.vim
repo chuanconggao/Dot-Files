@@ -1,5 +1,7 @@
 scriptencoding utf-8
 
+silent! pyx import sys
+
 let g:ctrlp_map = ''
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_follow_symlinks = 1
@@ -81,6 +83,10 @@ let g:ycm_complete_in_strings = 0
 let g:ycm_seed_identifiers_with_syntax = 0
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_key_list_select_completion = []
+let g:ycm_key_list_previous_completion = []
+let g:ycm_key_list_stop_completion = []
+let g:ycm_key_list_invoke_completion = []
 
 let g:languagetool_jar = "/usr/local/Cellar/languagetool/4.2/libexec/languagetool-commandline.jar"
 

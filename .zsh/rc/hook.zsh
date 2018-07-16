@@ -1,4 +1,4 @@
-PREPROMPT=$'%(!.%{\e[31m%}.%{\e[32m%})%n%{\e[0m%}'
+PREPROMPT=$'%{\e[1;90m%}CWD%{\e[0m%} '$'%(!.%{\e[31m%}%n .%{\e[32m%})%{\e[0m%}'
 if [[ $TMUX == "" && ( $SSH_CLIENT != "" || $SSH_TTY != "" ) ]]; then
     PREPROMPT+=$'@%{\e[35m%}%m%{\e[0m%}'
 fi
@@ -51,7 +51,7 @@ function myprecmd() {
 
     print -Pn "\e]2; %~ \a"
 
-    local pwdPrompt=" "$(~/.zsh/rc/pwd.py)
+    local pwdPrompt=$(~/.zsh/rc/pwd.py)
 
     local attrPrompt=" ("
 

@@ -10,9 +10,11 @@ hi! link pythonStrongComment StrongComment
 if getline(1) =~# '^#! */[^ ]*[ /]\+\(i\?python3\|pypy3\)\>'
     let b:syntastic_python_python_exec = '/usr/local/bin/python3'
     let b:syntastic_python_pylint_exec = '/usr/local/bin/pylint3'
+    let g:ale_python_pylint_executable = 'pylint3'
 else
     let b:syntastic_python_python_exec = '/usr/local/bin/python'
     let b:syntastic_python_pylint_exec = '/usr/local/bin/pylint'
+    let g:ale_python_pylint_executable = 'pylint'
 endif
 
 let b:venv = system("pushd " . expand("%:p:h") . " > /dev/null && pipenv --venv 2> /dev/null | head -c -1")

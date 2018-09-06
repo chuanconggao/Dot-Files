@@ -1,7 +1,7 @@
 set linespace=3
 set guifont=Consolas:h14
 
-set guioptions=c
+set guioptions=ce
 
 set lines=40 columns=160
 set fuoptions=maxvert,maxhorz
@@ -18,5 +18,5 @@ if has("gui")
     nmap <C-S-Tab> gT
 endif
 
-set guitablabel=%t%{FileStatus()}
-set guitabtooltip=%{ModifiedTimeStatuslineText()}
+set guitablabel=%t%{BufferStatus(bufname(\"\"))}
+set guitabtooltip=%{ModifiedTime()}

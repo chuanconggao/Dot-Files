@@ -3,10 +3,12 @@ Thumbs.db
 
 *.swp
 *.un~
+*.bak
 
+.cache
 .sass-cache
 .mypy_cache
 __pycache__
 *.py[cod]
 
-*.bak
+.coverage

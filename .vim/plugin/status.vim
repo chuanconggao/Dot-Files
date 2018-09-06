@@ -46,36 +46,3 @@ endfunction
 
 set laststatus=2
 set statusline=%#StatusLineBold#%t%{BufferStatus(bufname(\"\"))}%#StatusLine#\ (%{&fileformat},\ %{(&fenc==\"\"?&enc:&fenc)})\ %{ModifiedTime()}%=[%l%{TotalLineNumText()},\ %v]
-
-function! TabLabel(n)
-    let buflist = tabpagebuflist(a:n)
-    let winnr = tabpagewinnr(a:n)
-    let name = bufname(buflist[winnr - 1])
-
-    let label = ''
-    if name == ''
-        let label .= '[No Name]'
-    else
-        let label .= fnamemodify(name, ":t")
-    endif
-
-    return label . BufferStatus(name)
-endfunction
-
-function! TabLine()
-    let s = ''
-
-    for i in range(tabpagenr('$'))
-        if i + 1 == tabpagenr()
-            let s .= '%#TabLineSel#'
-        else
-            let s .= '%#TabLine#'
-        endif
-        let s .= '%' . (i + 1) . 'T'
-        let s .= ' %{TabLabel(' . (i + 1) . ')} '
-    endfor
-
-    return s . '%#TabLineFill#' . '%='
-endfunction
-
-set tabline=%!TabLine()
